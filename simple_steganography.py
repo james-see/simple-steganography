@@ -95,7 +95,7 @@ def saveImage(data, dimensions, fn):
 
 def information(data, dimensions):
 	print (8*3)*(dimensions[1]+dimensions[0]), "bits of potential storage."
-	print 3*(dimensions[1]+dimensions[0]), "characters of potential storage."
+	print (3*(dimensions[1]+dimensions[0]))/8, "characters of potential storage."
 
 def main():
 	if len(sys.argv) < 2:
