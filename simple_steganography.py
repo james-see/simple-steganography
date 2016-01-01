@@ -1,5 +1,9 @@
-import sys, os, struct, binascii
+import sys, os, struct, binascii, ntpath
 from PIL import Image
+
+def clean(path):
+	head, tail = ntpath.split(path)
+	return tail or ntpath.basename(head)
 
 def openImage(fn):
 	inFile = Image.open(fn)
@@ -52,12 +56,17 @@ def encodeData(data, dimensions, encode):
 #					i += 1
 #	print '-'*40
 
-
+def eom():
+	print "\nEnd of message.\n"
+	exit(0)
 
 def valid(input):
-	if input in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-=!@#$%^&*()_+`~'\";:,./<>[]{}\\| \t\b\r":
+	if input in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-=!@#$%^&*()_+~'\";:,./<>[]{}\\| \t\b\r":
 		return False
-	return True
+	elif input == "`":
+		eom()
+	else:
+		return True
 
 def decodeData(data, dimensions):
 	decode_Data = []
@@ -82,6 +91,8 @@ def decodeData(data, dimensions):
 
 	print "\n"
 
+	eom()
+
 
 def saveImage(data, dimensions, fn):
 	img = Image.new( 'RGB', (dimensions[0], dimensions[1]), "black")
@@ -103,8 +114,11 @@ def main():
 	else:
 		if sys.argv[1].lower() == "encode" and len(sys.argv) == 4:
 			inData, dimensions = openImage(sys.argv[2])
-			encoded = encodeData(inData, dimensions, sys.argv[3])
-			fn = str("out_"+sys.argv[2].strip("./"))
+			message = str(sys.argv[3].strip("\r\n") + "`")
+#			print message
+			encoded = encodeData(inData, dimensions, message)
+			fn = "out_"+clean(str(sys.argv[2])).strip("./")
+			print fn
 			saveImage(encoded, dimensions, fn)
 		elif sys.argv[1].lower() == "decode" and len(sys.argv) == 3:
 			inData, dimensions = openImage(sys.argv[2])
