@@ -142,7 +142,7 @@ def information(data, dimensions):
 
 def main():
 	if len(sys.argv) < 2:
-		print "usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here>"
+		print "usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>"
 	else:
 		if sys.argv[1].lower() == "encode" and len(sys.argv) == 4:
 			inData, dimensions = openImage(sys.argv[2])
@@ -158,7 +158,7 @@ def main():
 			inData, dimensions = openImage(sys.argv[2])
 			decodeData(inData, dimensions)
 		else:
-			print "usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here>"
+			print "usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>"
 
 if __name__ == "__main__":
     main()
