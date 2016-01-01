@@ -7,22 +7,22 @@ A simple python steganography tool. Make sure to install pillow via pip! Python 
 Any problems installing PIL?
 
 sudo easy_install pillow
-
+<br>
+<br>
 Mac:
 sudo pip install http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz
-
+<br>
 Linux:
-apt-get install python-dev
-apt-get install libjpeg-dev
-apt-get install libjpeg8-dev
-apt-get install libpng3 
-apt-get install libfreetype6-dev
-ln -s /usr/lib/i386-linux-gnu/libfreetype.so /usr/lib
-ln -s /usr/lib/i386-linux-gnu/libjpeg.so /usr/lib
-ln -s /usr/lib/i386-linux-gnu/libz.so /usr/lib
-
+apt-get install python-dev;
+apt-get install libjpeg-dev;
+apt-get install libjpeg8-dev;
+apt-get install libpng3 ;
+apt-get install libfreetype6-dev;
+ln -s /usr/lib/i386-linux-gnu/libfreetype.so /usr/lib;
+ln -s /usr/lib/i386-linux-gnu/libjpeg.so /usr/lib;
+ln -s /usr/lib/i386-linux-gnu/libz.so /usr/lib;
 pip install PIL  --allow-unverified PIL --allow-all-external
-
+<br>
 Windows:
 https://github.com/lightkeeper/lswindows-lib/blob/master/amd64/python/PIL-1.1.7.win-amd64-py2.7.exe?raw=true
 or
