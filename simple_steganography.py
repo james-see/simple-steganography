@@ -10,6 +10,10 @@ def openImage(fn):
 	pixels = inFile.load()
 	return pixels, (inFile.size[0], inFile.size[1])
 
+def eom():
+	print "\nFinished.\n"
+	exit(0)
+
 def encodeData(data, dimensions, encode):
 
 	encode_Data = []
@@ -20,18 +24,13 @@ def encodeData(data, dimensions, encode):
 		encode_Data.append('{:08b}'.format(ord(char)))
 	encode_Data = ''.join(encode_Data)
 
-#	print encode_Data
-#	print 8*len(encode_Data), "bytes needed."
-#	print (8*3)*(dimensions[1]+dimensions[0]), "bytes available."
-
 	i = 0
 	for y in range(dimensions[1]):
 			for x in range(dimensions[0]):
 				if i < len(encode_Data):
-#					print edit[x,y]
 					i += 1
 
-	if (8*3)*(dimensions[1]+dimensions[0]) > 8*len(encode_Data):
+	if (dimensions[1] + dimensions[0])*3 > len(encode_Data) + 2:
 		for y in range(dimensions[1]):
 			for x in range(dimensions[0]):
 					for i in range(3):
@@ -45,20 +44,8 @@ def encodeData(data, dimensions, encode):
 		return data
 
 	else:
-		print "You can only store ",  (3*(dimensions[1]+dimensions[0]))/3, "characters in this image!"
-
-#	print '-'*40
-#	i = 0
-#	for y in range(dimensions[1]):
-#			for x in range(dimensions[0]):
-#				if i < len(encode_Data):
-#					print edit[x,y]
-#					i += 1
-#	print '-'*40
-
-def eom():
-	print "\nEnd of message.\n"
-	exit(0)
+		print "You can only store ", (dimensions[1]+dimensions[0])*3, "characters in this image!"
+		eom()
 
 def valid(input):
 	if input in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-=!@#$%^&*()_+~'\";:,./<>[]{}\\| \t\b\r":
@@ -68,28 +55,73 @@ def valid(input):
 	else:
 		return True
 
+def validByte(input):
+	if input == "`":
+		return True
+	else:
+		return False
+
 def decodeData(data, dimensions):
 	decode_Data = []
 	tmp = ""
+	dataFile = False
 
-	for y in range(dimensions[1]):
-		for x in range(dimensions[0]):
-				for i in range(3):
-					tmp += str('{:08b}'.format(data[x,y][i]))[7]
-
-#	print tmp
+	for x in range(8):
+		for i in range(3):
+			tmp += str('{:08b}'.format(data[x,0][i]))[7]
 
 	tmp = [tmp[i:i+8] for i in range(0, len(tmp), 8)]
-	dat  = []
 
-	print "\n"
+	if chr(int(tmp[0],2)) == "`":
+		dataFile = True
 
-	for elem in tmp:
-		sys.stdout.write((chr(int(elem,2)),'\0')[valid(chr(int(elem,2)))])
+	tmp = ""
 
-#	print "\n" + "-"*40
+	if dataFile:
 
-	print "\n"
+		print "Note: decoding data files is buggy and broken. It may never be fixed. Who knows."
+		print "Please wait..."
+		print "Reading pixels..."
+
+		for y in range(dimensions[1]):
+			for x in range(dimensions[0]):
+					for i in range(3):
+						tmp += str('{:08b}'.format(data[x,y][i]))[7]
+		
+		print "Decoding..."
+
+		tmp = [tmp[i:i+8] for i in range(0, len(tmp), 8)]
+		tmp = tmp[1:]
+		dat = ""
+
+		for elem in tmp:
+			if not validByte(chr(int(elem,2))):
+				dat += chr(int(elem,2))
+			else:
+				break
+		
+		print "Writing to file \"out.data\"..."
+
+		open("out.data", "wb").write(bytes(dat[:-1]))
+
+	else:
+		print "Please wait..."
+		print "Reading pixels..."
+
+		for y in range(dimensions[1]):
+			for x in range(dimensions[0]):
+					for i in range(3):
+						tmp += str('{:08b}'.format(data[x,y][i]))[7]
+
+		print "Decoding..."
+		print "\n"
+
+		tmp = [tmp[i:i+8] for i in range(0, len(tmp), 8)]
+
+		for elem in tmp:
+			sys.stdout.write((chr(int(elem,2)),'\0')[valid(chr(int(elem,2)))])
+
+		print "\n"
 
 	eom()
 
@@ -106,7 +138,7 @@ def saveImage(data, dimensions, fn):
 
 def information(data, dimensions):
 	print (8*3)*(dimensions[1]+dimensions[0]), "bits of potential storage."
-	print (3*(dimensions[1]+dimensions[0]))/8, "characters of potential storage."
+	print (dimensions[1]+dimensions[0])*3, "characters of potential storage."
 
 def main():
 	if len(sys.argv) < 2:
@@ -114,8 +146,10 @@ def main():
 	else:
 		if sys.argv[1].lower() == "encode" and len(sys.argv) == 4:
 			inData, dimensions = openImage(sys.argv[2])
-			message = str(sys.argv[3].strip("\r\n") + "`")
-#			print message
+			if os.path.isfile(sys.argv[3]):
+				message = "`" + open(sys.argv[3],'rb').read() + "`"
+			else:
+				message = str(sys.argv[3].strip("\r\n") + "`")
 			encoded = encodeData(inData, dimensions, message)
 			fn = "out_"+clean(str(sys.argv[2])).strip("./")
 			print fn
