@@ -30,7 +30,7 @@ def encodeData(data, dimensions, encode):
 				if i < len(encode_Data):
 					i += 1
 
-	if (dimensions[1] + dimensions[0])*3 > len(encode_Data) + 2:
+	if ((dimensions[1] + dimensions[0])*3)/8 > len(encode_Data) + 2:
 		for y in range(dimensions[1]):
 			for x in range(dimensions[0]):
 					for i in range(3):
@@ -44,7 +44,7 @@ def encodeData(data, dimensions, encode):
 		return data
 
 	else:
-		print "You can only store ", (dimensions[1]+dimensions[0])*3, "characters in this image!"
+		print "You can only store ", ((dimensions[1]+dimensions[0])*3)/8 , "characters in this image!"
 		eom()
 
 def valid(input):
@@ -138,7 +138,7 @@ def saveImage(data, dimensions, fn):
 
 def information(data, dimensions):
 	print (8*3)*(dimensions[1]+dimensions[0]), "bits of potential storage."
-	print (dimensions[1]+dimensions[0])*3, "characters of potential storage."
+	print ((dimensions[1]+dimensions[0])*3)/8, "characters of potential storage."
 
 def main():
 	if len(sys.argv) < 2:
