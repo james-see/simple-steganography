@@ -4,7 +4,7 @@ A simple python steganography tool. Make sure to install pillow via pip! Python 
 #Installing PIL (Python Imaging Library)
 >> pip install Pillow
 
-Any problems instaling PIL?
+Any problems installing PIL?
 
 sudo easy_install pillow
 
