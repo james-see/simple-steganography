@@ -30,8 +30,6 @@ def encodeData(data, dimensions, encode):
 				if i < len(encode_Data):
 					i += 1
 
-	print (len(encode_Data) / 8) + 2
-
 	if ((dimensions[1] + dimensions[0])*3)/8 > (len(encode_Data) / 8) + 2:
 		for y in range(dimensions[1]):
 			for x in range(dimensions[0]):
@@ -104,7 +102,7 @@ def decodeData(data, dimensions):
 		
 		print "Writing to file \"out.data\"..."
 
-		open("out.data", "wb").write(bytes(dat[:-1]))
+		open("out.data", "wb").write(bytes(dat))
 
 	else:
 		print "Please wait..."
