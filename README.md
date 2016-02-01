@@ -10,7 +10,10 @@ A simple python steganography tool. Make sure to install pillow via pip! Python 
 <code>python (or python3) simple_steganography.py decode out_original.png</code>
 
 #Installing PIL (Python Imaging Library)
->> pip install Pillow
+
+## Requirements
+
+<code>pip install Pillow</code>
 
 Any problems installing PIL?
 
