@@ -11,11 +11,10 @@ def openImage(fn):
 	return pixels, (inFile.size[0], inFile.size[1])
 
 def eom():
-	print "\nFinished.\n"
+	print ("\nFinished.\n")
 	exit(0)
 
 def encodeData(data, dimensions, encode):
-
 	encode_Data = []
 	edit = data
 	j = 0
@@ -44,7 +43,7 @@ def encodeData(data, dimensions, encode):
 		return data
 
 	else:
-		print "You can only store ", ((dimensions[1]+dimensions[0])*3)/8 , "characters in this image!"
+		print ("You can only store ", ((dimensions[1]+dimensions[0])*3)/8 , "characters in this image!")
 		eom()
 
 def valid(input):
@@ -79,17 +78,16 @@ def decodeData(data, dimensions):
 
 	if dataFile:
 
-		print "Note: decoding data files is buggy and broken. It may never be fixed. Who knows."
-		print "Please wait..."
-		print "Reading pixels..."
+		print ("Note: decoding data files is buggy and broken. It may never be fixed. Who knows.")
+		print ("Please wait...")
+		print ("Reading pixels...")
 
 		for y in range(dimensions[1]):
 			for x in range(dimensions[0]):
 					for i in range(3):
 						tmp += str('{:08b}'.format(data[x,y][i]))[7]
-		
-		print "Decoding..."
 
+		print ("Decoding..")
 		tmp = [tmp[i:i+8] for i in range(0, len(tmp), 8)]
 		tmp = tmp[1:]
 		dat = ""
@@ -99,36 +97,36 @@ def decodeData(data, dimensions):
 				dat += chr(int(elem,2))
 			else:
 				break
-		
-		print "Writing to file \"out.data\"..."
+
+		print ("Writing to file \"out.data\"...")
 
 		open("out.data", "wb").write(bytes(dat))
 
 	else:
-		print "Please wait..."
-		print "Reading pixels..."
+		print ("Please wait...")
+		print ("Reading pixels...")
 
 		for y in range(dimensions[1]):
 			for x in range(dimensions[0]):
 					for i in range(3):
 						tmp += str('{:08b}'.format(data[x,y][i]))[7]
 
-		print "Decoding..."
-		print "\n"
+		print ("Decoding...")
+		print ("\n")
 
 		tmp = [tmp[i:i+8] for i in range(0, len(tmp), 8)]
 
 		for elem in tmp:
 			sys.stdout.write((chr(int(elem,2)),'\0')[valid(chr(int(elem,2)))])
 
-		print "\n"
+		print ("\n")
 
 	eom()
 
 
 def saveImage(data, dimensions, fn):
 	img = Image.new( 'RGB', (dimensions[0], dimensions[1]), "black")
-	pixels = img.load() 
+	pixels = img.load()
 
 	for y in range(dimensions[1]):
 		for x in range(dimensions[0]):
@@ -142,7 +140,7 @@ def information(data, dimensions):
 
 def main():
 	if len(sys.argv) < 2:
-		print "usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>"
+		print ("usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>")
 	else:
 		if sys.argv[1].lower() == "encode" and len(sys.argv) == 4:
 			inData, dimensions = openImage(sys.argv[2])
@@ -152,16 +150,16 @@ def main():
 				message = str(sys.argv[3].strip("\r\n") + "`")
 			encoded = encodeData(inData, dimensions, message)
 			fn = "out_"+clean(str(sys.argv[2])).strip("./")
-			print fn
+			print (fn)
 			saveImage(encoded, dimensions, fn)
 		elif sys.argv[1].lower() == "decode" and len(sys.argv) == 3:
 			inData, dimensions = openImage(sys.argv[2])
 			decodeData(inData, dimensions)
 		else:
-			print "usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>"
+			print ("usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>")
 
 if __name__ == "__main__":
-    main()
+	main()
 
 #Encode example
 	#inData, dimensions = openImage("test.png")
