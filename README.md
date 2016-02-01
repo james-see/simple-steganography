@@ -21,6 +21,7 @@ sudo easy_install pillow
 Mac:
 Python 2.7
 sudo pip install http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz
+<br>
 or (easier)
 Python 3.x
 pip3 install pillow
