@@ -1,6 +1,14 @@
 # simple-steganography
 A simple python steganography tool. Make sure to install pillow via pip! Python 2.7.
 
+# usage example
+
+### to encode
+<code>python (or python3) simple_steganography.py encode original.png "hello you!"</code>
+
+### to decode
+<code>python (or python3) simple_steganography.py decode out_original.png</code>
+
 #Installing PIL (Python Imaging Library)
 >> pip install Pillow
 
@@ -11,7 +19,11 @@ sudo easy_install pillow
 <br>
 <br>
 Mac:
+Python 2.7
 sudo pip install http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz
+or (easier)
+Python 3.x
+pip3 install pillow
 <br><br>
 Linux:
 apt-get install python-dev;
