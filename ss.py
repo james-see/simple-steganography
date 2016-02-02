@@ -16,7 +16,7 @@ def eom():
 
 def encodeData(data, dimensions, encode):
 	encode_Data = []
-	edit = data
+	editt = data
 	j = 0
 
 	for char in encode:
@@ -32,14 +32,15 @@ def encodeData(data, dimensions, encode):
 	if ((dimensions[1] + dimensions[0])*3)/8 > (len(encode_Data) / 8) + 2:
 		for y in range(dimensions[1]):
 			for x in range(dimensions[0]):
-					for i in range(3):
+					while i in list(range(3)):
 						if j < len(encode_Data):
-							tmp = list(edit[x,y])
+							tmp = list(editt[x,y])
 							tmp[i] = ((tmp[i] & 0xfe), (tmp[i] | 0x1))[int(encode_Data[j])]
 							j += 1
-							edit[x,y] = tuple(tmp)
+							editt[x,y] = tuple(tmp)
 						else:
-							break
+							print ('not long enough')
+							exit('try again with another image')
 		return data
 
 	else:
