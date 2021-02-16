@@ -16,7 +16,7 @@ def openImage(fn):
 
 
 def eom():
-    print ("\nFinished.\n")
+    print("\nFinished.\n")
     exit(0)
 
 
@@ -37,19 +37,19 @@ def encodeData(data, dimensions, encode):
     if ((dimensions[1] + dimensions[0])*3)/8 > (len(encode_Data) / 8) + 2:
         for y in range(dimensions[1]):
             for x in range(dimensions[0]):
-                    while i in list(range(3)):
-                        if j < len(encode_Data):
-                            tmp = list(editt[x,y])
-                            tmp[i] = ((tmp[i] & 0xfe), (tmp[i] | 0x1))[int(encode_Data[j])]
-                            j += 1
-                            editt[x,y] = tuple(tmp)
-                        else:
-                            print('not long enough')
-                            exit('try again with another image')
+                while i in list(range(3)):
+                    if j < len(encode_Data):
+                        tmp = list(editt[x,y])
+                        tmp[i] = ((tmp[i] & 0xfe), (tmp[i] | 0x1))[int(encode_Data[j])]
+                        j += 1
+                        editt[x, y] = tuple(tmp)
+                    else:
+                        print('not long enough')
+                        exit('try again with another image')
         return data
 
     else:
-        print("You can only store ", ((dimensions[1]+dimensions[0])*3)/8 , "characters in this image!")
+        print("You can only store ", ((dimensions[1]+dimensions[0])*3)/8, "characters in this image!")
         eom()
 
 
@@ -91,8 +91,8 @@ def decodeData(data, dimensions):
 
         for y in range(dimensions[1]):
             for x in range(dimensions[0]):
-                    for i in range(3):
-                        tmp += str('{:08b}'.format(data[x,y][i]))[7]
+                for i in range(3):
+                    tmp += str('{:08b}'.format(data[x, y][i]))[7]
 
         print("Decoding..")
         tmp = [tmp[i:i+8] for i in range(0, len(tmp), 8)]
@@ -100,8 +100,8 @@ def decodeData(data, dimensions):
         dat = ""
 
         for elem in tmp:
-            if not validByte(chr(int(elem,2))):
-                dat += chr(int(elem,2))
+            if not validByte(chr(int(elem, 2))):
+                dat += chr(int(elem, 2))
             else:
                 break
 
@@ -115,8 +115,8 @@ def decodeData(data, dimensions):
 
         for y in range(dimensions[1]):
             for x in range(dimensions[0]):
-                    for i in range(3):
-                        tmp += str('{:08b}'.format(data[x,y][i]))[7]
+                for i in range(3):
+                    tmp += str('{:08b}'.format(data[x, y][i]))[7]
 
         print("Decoding...")
         print("\n")
@@ -159,13 +159,13 @@ def main():
                 message = str(sys.argv[3].strip("\r\n") + "`")
             encoded = encodeData(inData, dimensions, message)
             fn = "out_"+clean(str(sys.argv[2])).strip("./")
-            print (fn)
+            print(fn)
             saveImage(encoded, dimensions, fn)
         elif sys.argv[1].lower() == "decode" and len(sys.argv) == 3:
             inData, dimensions = openImage(sys.argv[2])
             decodeData(inData, dimensions)
         else:
-            print ("usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>")
+            print("usage: " + sys.argv[0] + " <encode/decode> <image_file> <if-encode-then-put-message-here or filepath>")
 
 
 if __name__ == "__main__":
