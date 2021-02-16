@@ -4,10 +4,9 @@ import stepic
 
 imager = input('full path of image location: ')  # if using python 3.x
 im = Image.open(imager)
-im2 = stepic.encode(im, 'HELLO')
+datatoencode = open('test.txt','rb').read()
+im2 = stepic.encode(im, datatoencode)
 im2.save('stegtest.png', "PNG")
 im1 = Image.open('stegtest.png')
 s = stepic.decode(im1)
 print(s)
-data = s.decode()
-print(data)
