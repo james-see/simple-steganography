@@ -4,9 +4,11 @@ import stepic
 
 imager = input('full path of image location: ')  # if using python 3.x
 im = Image.open(imager)
-datatoencode = open('test.txt','rb').read()
-im2 = stepic.encode(im, datatoencode)
+encodeddata = input('message to hide: ').encode()
+# TODO add ability to also ask for a file to hide
+# datatoencode = open('test.txt', 'rb').read()
+im2 = stepic.encode(im, encodeddata)
 im2.save('stegtest.png', "PNG")
 im1 = Image.open('stegtest.png')
 s = stepic.decode(im1)
-print(s)
+print(f"The message you hid in the image: {s}")
