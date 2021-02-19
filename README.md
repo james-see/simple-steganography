@@ -14,18 +14,9 @@ A simple python steganography tool. Make sure to install pillow via pip! Python 
 ## Requirements
 
 <code>pip install Pillow</code>
+<br>
+<br>
 
-Any problems installing PIL?
-
-<code>sudo easy_install pillow</code>
-<br>
-<br>
-<br>
-Mac:
-Python 2.7
-<code>sudo pip install http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz</code>
-<br>
-or (easier)
 Python 3.x
 <code>pip3 install pillow</code>
 <br><br>
