@@ -4,16 +4,11 @@ A simple python steganography tool. Make sure to install pillow via pip! Python 
 # usage example
 
 ### to encode
-<code>python (or python3) ss.py encode original.png "hello you!"</code>
-
-### to decode
-<code>python (or python3) ss.py decode out_original.png</code>
-
-#Installing PIL (Python Imaging Library)
+<code>python3 ss.py</code>
 
 ## Requirements
 
-<code>pip install Pillow</code>
+<code>pip3 install Pillow</code>
 <br>
 <br>
 
