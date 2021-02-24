@@ -4,6 +4,8 @@ import stepic
 
 # get image path (use pngs/original.png)
 imager = input('full path of image location: ') 
+if imager == "":
+    imager = "pngs/original.png"
 # open image
 im = Image.open(imager)
 # get data to encode and hide
