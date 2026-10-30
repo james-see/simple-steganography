@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: simple-steganography
+Version: 1.0.6
+Summary: A simple Python steganography tool for hiding messages in images
+Author-email: James Campbell <james@jamescampbell.us>
+Maintainer-email: James Campbell <james@jamescampbell.us>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/james-see/simple-steganography
+Project-URL: Repository, https://github.com/james-see/simple-steganography
+Project-URL: Issues, https://github.com/james-see/simple-steganography/issues
+Keywords: steganography,images,png,cryptography,metadata
+Classifier: Development Status :: 4 - Beta
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Programming Language :: Python :: 3.15
+Classifier: Topic :: Security :: Cryptography
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pillow>=10.0.0
+Requires-Dist: stepic>=0.5.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0; extra == "dev"
+Requires-Dist: ruff>=0.6; extra == "dev"
+
+# simple-steganography
+A simple python steganography tool. Make sure to install pillow via pip or use the included Pipfile for pipenv shell to get you setup quickly. 
+
+# usage example
+
+### to encode
+<code>python3 ss.py</code>
+
+It will ask for full path to image (pngs/original.jpg) included.
+It will ask for the message to hide. This can be any string. You can also use a text file or similar to hide in image, but beyond the scope of the example ss.py file.
+
+## Requirements
+
+<code>pip3 install pillow stepic</code> see requirements.txt or Pipfile.
+<br>
+<br>
+3.9.1 required for pipenv.
+
+<br><br>
+

@@ -1,0 +1,2 @@
+[console_scripts]
+simple-steganography = simple_steganography:main
